@@ -1,0 +1,8 @@
+<h1>Hello articles!</h1>
+<h3><strong>Title: </strong><%= @article.title %></h3>
+<h2><strong>Description: </strong><%= @article.description%></h2>
+<p>
+    <span><%= link_to 'Edit', edit_article_path(@article) %></span>
+    <span><%= link_to 'Delete', article_path(@article), method: :delete %></span>
+</p>
+<p><%= link_to 'Go Back', articles_path %></p>
