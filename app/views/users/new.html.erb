@@ -1,0 +1,33 @@
+<h2>Sign up for the blog.</h2>
+
+<% if @user.errors.any?%>
+<h3>Your article didn't save because of the following:</h3>
+<ul>
+    <%@user.errors.full_messages.each do |err|%>
+        <li><%=err%></li>
+    <%end%>
+</ul>
+<%end%>
+
+<%= form_with scope: :user, url: users_path, local: true do |f| %>
+<p>
+    <%= f.label :username%>
+    <%= f.text_field :username%>
+</p>
+
+<p>
+    <%= f.label :email%>
+    <%= f.email_field :email%>
+</p>
+
+<p>
+    <%= f.label :password%>
+    <%= f.password_field :password%>
+</p>
+
+<p>
+    <%= f.submit "Create User"%>
+</p>
+<% end %>
+
+<p><%= link_to 'Go Back', articles_path %></p>
