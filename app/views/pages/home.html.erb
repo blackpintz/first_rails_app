@@ -1,5 +1,14 @@
 <h1>Welcome to Homepage!</h1>
+
+<% if logged_in? %>
 <p>
     <span><%= link_to 'View all the articles', articles_path %></span>
-    <span><%= link_to 'Sign up', signup_path %></span>
 </p>
+<% else %>
+<p>
+    <span><%= link_to 'sign up', signup_path %></span>
+    <span><%= link_to 'Log in', login_path %></span> 
+</p>
+<% end %>
+
+<p><%= current_user%></p>

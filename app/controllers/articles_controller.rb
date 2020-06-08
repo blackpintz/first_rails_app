@@ -1,8 +1,10 @@
 class ArticlesController < ApplicationController
-   
+   before_action :set_article, only: [:show, :edit, :update, :destroy]
+   before_action :require_login, except: [:index, :show]
+   before_action :require_user, only: [:edit, :update, :destroy]
+  
     
     def show
-        @article = Article.find(params[:id])
     end
     
     def index
@@ -15,21 +17,19 @@ class ArticlesController < ApplicationController
     
     def create
        @article = Article.new(params.require(:article).permit(:title, :description))
-       @article.user_id = User.first.id
+       @article.user_id = current_user.id
        if @article.save
            flash[:notice] = "Article was created successfully."
-           redirect_to articles_path 
+           redirect_to article_path(@article) 
        else
            render 'new'
        end
     end
     
     def edit
-         @article = Article.find(params[:id])
     end
     
     def update
-        @article = Article.find(params[:id])
         if @article.update(params.require(:article).permit(:title, :description))
             flash[:notice] = "Article was successfully edited."
             redirect_to article_path
@@ -39,10 +39,22 @@ class ArticlesController < ApplicationController
     end
     
     def destroy
-        @article = Article.find(params[:id])
         @article.destroy
          flash[:notice] = "#{@article.title} was successfully deleted."
         redirect_to articles_path
+    end
+    
+    private
+    
+    def set_article
+        @article = Article.find(params[:id])
+    end
+    
+    def require_user
+        if current_user != @article.user
+            flash[:alert] = "You cannot change an article that you don't own."
+            redirect_to articles_path
+        end
     end
     
 end
