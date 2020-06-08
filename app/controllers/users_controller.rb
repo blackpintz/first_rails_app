@@ -7,7 +7,7 @@ class UsersController < ApplicationController
         @user = User.new(user_params)
         if @user.save
             flash[:notice] = "Welcome to BlogApp, #{@user.username}"
-            redirect_to articles_path
+            redirect_to users_path
         else
             render 'new'
         end
@@ -21,10 +21,19 @@ class UsersController < ApplicationController
         @user = User.find(params[:id])
         if @user.update(user_params)
             flash[:notice] = "#{@user.username}, your profiles was successfully edited."
-            redirect_to articles_path
+            redirect_to user_path(@user)
         else
             render 'edit'
         end
+    end
+    
+    def show
+        @user = User.find(params[:id])
+        @articles = @user.articles.paginate(page: params[:page], per_page: 4)
+    end
+    
+    def index
+        @users = User.paginate(page: params[:page], per_page: 5)
     end
     
     private

@@ -1,0 +1,9 @@
+<h3><%= @user.username%></h3>
+<h3>Articles written by <%= @user.username%></h3>
+<%= will_paginate @articles %>
+<hr>
+<%@articles.each do |article|%>
+<h3><%=article.title%></h3>
+<p><%=article.description%></p>
+<hr>
+<%end%>

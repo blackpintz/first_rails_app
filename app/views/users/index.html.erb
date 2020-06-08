@@ -1,0 +1,19 @@
+<h2>BlogApp Bloggers</h2>
+
+<%= will_paginate @users %>
+
+<%@users.each do |user|%>
+<h4><%= user.username%></h4>
+<p><%= user.email%></p>
+<p><%= user.username%> has written <%=pluralize(user.articles.count, "article")%> </p>
+<p>
+    <span><%= link_to "View #{user.username}'s articles", user_path(user) %></span>
+</p>
+<p> joined <%= time_ago_in_words(user.created_at)%> ago</p>
+<hr>
+<% end %>
+
+<p>
+    <span><%= link_to 'Create new article', new_article_path %></span>
+    <span><%= link_to 'Go Back', articles_path %></span>
+</p>
