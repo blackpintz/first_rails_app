@@ -4,6 +4,7 @@
 <h4>Created by: <%= @article.user.username%></h4>
 <p>
     <span><%= link_to 'Edit', edit_article_path(@article) %></span>
-    <span><%= link_to 'Delete', article_path(@article), method: :delete %></span>
+    <span><%= link_to 'Delete', article_path(@article), method: :delete, data: {confirm: "Are you sure you want to delete the article?"}
+ %></span>
 </p>
 <p><%= link_to 'Go Back', articles_path %></p>
