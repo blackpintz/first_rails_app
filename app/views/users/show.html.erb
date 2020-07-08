@@ -1,4 +1,10 @@
 <h3><%= @user.username%></h3>
+<% if logged_in? && current_user == @user%>
+<p>
+    <span><%= link_to "Edit", edit_user_path%></span>
+    <span><%= link_to "Delete", user_path(current_user), method: :delete, data: {confirm: "Are you sure you want to delete your account?"} %></span>
+</p>
+<% end %>
 <h3>Articles written by <%= @user.username%></h3>
 <%= will_paginate @articles %>
 <hr>

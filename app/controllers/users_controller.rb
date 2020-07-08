@@ -1,4 +1,9 @@
 class UsersController < ApplicationController
+    
+    before_action :set_user, only: [:show, :edit, :update, :destroy]
+    before_action :require_login, except: [:index, :show]
+    before_action :require_user, only: [:edit, :update, :destroy]
+    
     def new
         @user = User.new
     end
@@ -15,11 +20,9 @@ class UsersController < ApplicationController
     end
     
     def edit
-        @user = User.find(params[:id])
     end
     
     def update
-        @user = User.find(params[:id])
         if @user.update(user_params)
             flash[:notice] = "#{@user.username}, your profiles was successfully edited."
             redirect_to user_path(@user)
@@ -29,7 +32,6 @@ class UsersController < ApplicationController
     end
     
     def show
-        @user = User.find(params[:id])
         @articles = @user.articles.paginate(page: params[:page], per_page: 4)
     end
     
@@ -37,8 +39,26 @@ class UsersController < ApplicationController
         @users = User.paginate(page: params[:page], per_page: 5)
     end
     
+    def destroy
+        @user.destroy
+        session[:user_id] = nil
+        flash[:notice] = "Your account and articles have successfully been deleted."
+        redirect_to root_path
+    end
+    
     private
     def user_params
         params.require(:user).permit(:username, :email, :password)
+    end
+    
+    def set_user
+      @user = User.find(params[:id])  
+    end
+    
+    def require_user
+        if current_user != @user
+            flash[:alert] = "You cannot change another user's details."
+            redirect_to user_path(current_user)
+        end
     end
 end

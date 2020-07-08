@@ -2,7 +2,11 @@
 <h1>My Articles!</h1>
 <%@articles.each do |article| %>
 <h3>Title: <%=article.title %></h3>
+<% article.categories.each do |tag|%>
+<span><%= tag.name %></span>
+<% end %>
 <h4>Description: <%=article.description%></h4>
+<h5>Written by: <%= link_to article.user.username, user_path(article.user)%></h5>
 <p>
 <span><%= link_to 'Show', article_path(article) %></span>
 <% if logged_in? && article.user == current_user %>
@@ -12,8 +16,9 @@
 </p>
 <hr>
 <% end %>
-
+<% if logged_in? %>
 <h4>
     <span><%= link_to 'Create new article', new_article_path %></span>
     <span><%= link_to 'Log out', logout_path,  method: :delete %></span>
 </h4>
+<% end %>

@@ -21,6 +21,13 @@
 </p>
 
 <p>
+    <%= f.label :category%>
+    <%= f.collection_select(:category_ids, Category.all, :id, :name, 
+    {prompt: "Please Select a Sector"}, 
+    {multiple: true}) %>
+</p>
+
+<p>
     <%= f.submit "Update Article"%>
 </p>
 <% end %>

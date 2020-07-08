@@ -1,26 +1,36 @@
-# README
+## Building with Active Record
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This builds an application similar to Reddit (called Micro-Reddit), where a user can create a post and add comments to it.
 
-[!Link](https://sheltered-dusk-00981.herokuapp.com/)
+## Built with
 
-Things you may want to cover:
+- Ruby on Rails
 
-* Ruby version
 
-* System dependencies
+## Getting Started
 
-* Configuration
+- Clone the git repository.
+- cd into the project
+- run bundle install.
+- run ```rails c```
+- Use ```Post.create, User.create, Comment.create``` to create new posts, users and comments respectively.
+- Refer [!here](https://www.theodinproject.com/courses/ruby-on-rails/lessons/building-with-active-record-ruby-on-rails) to find more on how the 
+- associations between the models work.
 
-* Database creation
+## Authors
 
-* Database initialization
+Rose Wanjohi
 
-* How to run the test suite
+- Github: [@blackpintz](https://github.com/blackpintz)
 
-* Services (job queues, cache servers, search engines, etc.)
+- Twitter: [@blackpintz](https://twitter.com/blackpintz)
 
-* Deployment instructions
 
-* ...
+Abdoulaye Njigouh
+
+- Github: [@Abdoulaye](https://github.com/Abdoulaye-Thespy)
+
+
+## Show your support
+
+Give a ⭐️ if you like this project!
